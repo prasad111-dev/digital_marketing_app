@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Digital Marketing App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Digital Marketing Dashboard</h1>
+            <div class="header-actions">
+                <span>Welcome, Admin</span>
+                <a href="/logout" class="btn-secondary">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Client Management Section -->
+        <section class="card">
+            <h2>Client Management</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="select-client">Select Client</button>
+                <button class="tab-btn" data-tab="add-client">Add New Client</button>
+            </div>
+            
+            <!-- Select Client Tab -->
+            <div id="select-client" class="tab-content active">
+                <div class="form-group">
+                    <label for="client-select">Select Client:</label>
+                    <select id="client-select">
+                        <option value="">-- Select a client --</option>
+                    </select>
+                </div>
+                
+                <div id="client-info" class="client-info" style="display: none;">
+                    <h4>Client Details</h4>
+                    <div id="client-details"></div>
+                </div>
+            </div>
+            
+            <!-- Add Client Tab -->
+            <div id="add-client" class="tab-content">
+                <form id="add-client-form">
+                    <div class="form-group">
+                        <label for="client-name">Client Name *</label>
+                        <input type="text" id="client-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-email">Email</label>
+                        <input type="email" id="client-email" name="email">
+                    </div>
+                    
+                    <h4>Social Media Tokens</h4>
+                    
+                    <div class="form-group">
+                        <label for="instagram-token">Instagram Token</label>
+                        <input type="text" id="instagram-token" name="instagram_token">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="facebook-token">Facebook Token</label>
+                        <input type="text" id="facebook-token" name="facebook_token">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="linkedin-token">LinkedIn Token</label>
+                        <input type="text" id="linkedin-token" name="linkedin_token">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="youtube-token">YouTube Token</label>
+                        <input type="text" id="youtube-token" name="youtube_token">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Add Client</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Post Creation Section -->
+        <section class="card" id="post-creation-section" style="display: none;">
+            <h2>Create Social Media Post</h2>
+            
+            <!-- Platform Selection -->
+            <div class="form-group">
+                <label>Select Platforms:</label>
+                <div class="platform-checkboxes">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="platform" value="instagram">
+                        Instagram
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="platform" value="facebook">
+                        Facebook
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="platform" value="linkedin">
+                        LinkedIn
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="platform" value="youtube">
+                        YouTube
+                    </label>
+                </div>
+            </div>
+            
+            <!-- File Upload -->
+            <div class="form-group">
+                <label for="media-upload">Upload Media Files:</label>
+                <input type="file" id="media-upload" multiple accept="image/*,video/*">
+                <div id="file-list" class="file-list"></div>
+            </div>
+            
+            <!-- Media Previews and Captions -->
+            <div id="media-previews" class="media-previews"></div>
+            
+            <!-- Submit Button -->
+            <button id="submit-post" class="btn-primary" disabled>Post to Selected Platforms</button>
+        </section>
+
+        <!-- Results Section -->
+        <section class="card" id="results-section" style="display: none;">
+            <h2>Posting Results</h2>
+            <div id="posting-results"></div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
