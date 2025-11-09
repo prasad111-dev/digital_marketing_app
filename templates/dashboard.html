@@ -6,182 +6,206 @@
     <title>Dashboard - Digital Marketing App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-        /* ==== Modern Color Theme ==== */
+        /* ========== COLORS & BASE ========== */
         :root {
-            --primary-color: #4f46e5;
-            --primary-gradient: linear-gradient(90deg, #4f46e5, #7c3aed);
-            --secondary-color: #f9fafb;
-            --accent-color: #06b6d4;
-            --text-color: #1f2937;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #f3f4f6;
+            --accent: #10b981;
+            --error: #ef4444;
+            --text-dark: #111827;
+            --text-light: #6b7280;
             --card-bg: #ffffff;
-            --shadow: 0 8px 20px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
+            --bg: #f9fafb;
         }
 
         body {
             font-family: "Poppins", sans-serif;
-            background: linear-gradient(180deg, #eef2ff, #f9fafb);
+            background-color: var(--bg);
+            color: var(--text-dark);
             margin: 0;
-            color: var(--text-color);
-            transition: var(--transition);
+            padding: 0;
         }
 
         .header {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 1.2rem 0;
-            box-shadow: var(--shadow);
-            animation: fadeInDown 1s ease;
+            background-color: var(--primary);
+            color: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            animation: fadeDown 0.6s ease;
         }
 
         .container {
             width: 90%;
-            margin: auto;
-            max-width: 1100px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 1.8rem;
-            font-weight: 600;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .header-actions {
             float: right;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .btn-primary, .btn-secondary {
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .btn-primary {
-            background: var(--primary-gradient);
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.05);
-            background: linear-gradient(90deg, #7c3aed, #4f46e5);
+            margin-top: -2.2rem;
         }
 
         .btn-secondary {
-            background: #fff;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
+            background-color: #fff;
+            color: var(--primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.3s;
         }
-
         .btn-secondary:hover {
-            background: var(--primary-color);
-            color: #fff;
-            transform: scale(1.05);
+            background-color: var(--secondary);
         }
 
         main {
             margin-top: 2rem;
-            animation: fadeIn 1s ease;
+            animation: fadeIn 0.8s ease;
         }
 
         .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
             margin-bottom: 2rem;
-            transition: var(--transition);
-            animation: slideUp 0.8s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
         }
-
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
         }
 
-        .tabs {
-            display: flex;
-            gap: 1rem;
+        h1, h2, h4 {
             margin-bottom: 1rem;
-        }
-
-        .tab-btn {
-            background: #e0e7ff;
-            color: var(--primary-color);
-            border: none;
-            padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            background: var(--primary-gradient);
-            color: #fff;
-            transform: scale(1.05);
         }
 
         .form-group {
             margin-bottom: 1rem;
-            display: flex;
-            flex-direction: column;
         }
 
         label {
-            font-weight: 600;
-            margin-bottom: 0.3rem;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.4rem;
         }
 
-        input, select {
+        input, select, textarea {
+            width: 100%;
             padding: 0.6rem;
             border: 1px solid #d1d5db;
             border-radius: 6px;
-            transition: var(--transition);
+            transition: border-color 0.3s ease;
         }
-
-        input:focus, select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 4px var(--accent-color);
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
             outline: none;
         }
 
-        .client-info, .media-previews, #posting-results {
-            animation: fadeIn 0.8s ease;
+        .btn-primary {
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+        .btn-primary:disabled {
+            background-color: #a5b4fc;
+            cursor: not-allowed;
         }
 
-        /* Media Previews */
-        .media-previews img, .media-previews video {
-            width: 120px;
-            height: 120px;
-            border-radius: 12px;
-            margin: 0.5rem;
-            object-fit: cover;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+        .tabs {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 0.7rem;
+            cursor: pointer;
+            border: none;
+            background: var(--secondary);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-radius: 6px;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .tab-content.active {
+            display: block;
         }
 
-        .media-previews img:hover, .media-previews video:hover {
-            transform: scale(1.05);
+        .client-info {
+            background: #f9fafb;
+            padding: 1rem;
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            margin-top: 1rem;
+            animation: slideUp 0.4s ease;
         }
 
-        /* Animations */
+        .file-item, .media-preview {
+            background: var(--secondary);
+            padding: 0.6rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .remove-file {
+            background: none;
+            color: var(--error);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .platform-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .result-item {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.4rem;
+        }
+        .result-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .result-error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* ========== ANIMATIONS ========== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-15px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -223,7 +247,7 @@
             </div>
             
             <!-- Add Client Tab -->
-            <div id="add-client" class="tab-content" style="display: none;">
+            <div id="add-client" class="tab-content">
                 <form id="add-client-form">
                     <div class="form-group">
                         <label for="client-name">Client Name *</label>
@@ -234,81 +258,65 @@
                         <label for="client-email">Email</label>
                         <input type="email" id="client-email" name="email">
                     </div>
-
+                    
+                    <h4>Social Media Tokens</h4>
+                    
+                    <div class="form-group">
+                        <label for="instagram-token">Instagram Token</label>
+                        <input type="text" id="instagram-token" name="instagram_token">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="facebook-token">Facebook Token</label>
+                        <input type="text" id="facebook-token" name="facebook_token">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="linkedin-token">LinkedIn Token</label>
+                        <input type="text" id="linkedin-token" name="linkedin_token">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="youtube-token">YouTube Token</label>
+                        <input type="text" id="youtube-token" name="youtube_token">
+                    </div>
+                    
                     <button type="submit" class="btn-primary">Add Client</button>
                 </form>
             </div>
         </section>
 
         <!-- Post Creation Section -->
-        <section class="card" id="post-creation-section">
+        <section class="card" id="post-creation-section" style="display: none;">
             <h2>Create Social Media Post</h2>
             
-            <!-- Platform Selection -->
             <div class="form-group">
                 <label>Select Platforms:</label>
                 <div class="platform-checkboxes">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="platform" value="instagram">
-                        Instagram
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="platform" value="facebook">
-                        Facebook
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="platform" value="linkedin">
-                        LinkedIn
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="platform" value="youtube">
-                        YouTube
-                    </label>
+                    <label class="checkbox-label"><input type="checkbox" name="platform" value="instagram"> Instagram</label>
+                    <label class="checkbox-label"><input type="checkbox" name="platform" value="facebook"> Facebook</label>
+                    <label class="checkbox-label"><input type="checkbox" name="platform" value="linkedin"> LinkedIn</label>
+                    <label class="checkbox-label"><input type="checkbox" name="platform" value="youtube"> YouTube</label>
                 </div>
             </div>
-            
-            <!-- File Upload -->
+
             <div class="form-group">
                 <label for="media-upload">Upload Media Files:</label>
                 <input type="file" id="media-upload" multiple accept="image/*,video/*">
                 <div id="file-list" class="file-list"></div>
             </div>
-            
-            <!-- Media Previews and Captions -->
+
             <div id="media-previews" class="media-previews"></div>
-            
-            <!-- Submit Button -->
             <button id="submit-post" class="btn-primary" disabled>Post to Selected Platforms</button>
         </section>
 
         <!-- Results Section -->
-        <section class="card" id="results-section">
+        <section class="card" id="results-section" style="display: none;">
             <h2>Posting Results</h2>
             <div id="posting-results"></div>
         </section>
     </main>
 
-    <script>
-        // Tab Switching Logic
-        const tabButtons = document.querySelectorAll(".tab-btn");
-        const tabContents = document.querySelectorAll(".tab-content");
-        const postSection = document.getElementById("post-creation-section");
-
-        tabButtons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                tabButtons.forEach(b => b.classList.remove("active"));
-                tabContents.forEach(c => c.style.display = "none");
-                btn.classList.add("active");
-                document.getElementById(btn.dataset.tab).style.display = "block";
-
-                // Hide or show post creation section
-                if (btn.dataset.tab === "add-client") {
-                    postSection.style.display = "none";
-                } else {
-                    postSection.style.display = "block";
-                }
-            });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
