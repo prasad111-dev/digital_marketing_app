@@ -5,6 +5,186 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Digital Marketing App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* ==== Modern Color Theme ==== */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-gradient: linear-gradient(90deg, #4f46e5, #7c3aed);
+            --secondary-color: #f9fafb;
+            --accent-color: #06b6d4;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(180deg, #eef2ff, #f9fafb);
+            margin: 0;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1.2rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeInDown 1s ease;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            max-width: 1100px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            float: right;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #7c3aed, #4f46e5);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        main {
+            margin-top: 2rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            animation: slideUp 0.8s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: #e0e7ff;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary-gradient);
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        input, select {
+            padding: 0.6rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 4px var(--accent-color);
+            outline: none;
+        }
+
+        .client-info, .media-previews, #posting-results {
+            animation: fadeIn 0.8s ease;
+        }
+
+        /* Media Previews */
+        .media-previews img, .media-previews video {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            margin: 0.5rem;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .media-previews img:hover, .media-previews video:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -43,7 +223,7 @@
             </div>
             
             <!-- Add Client Tab -->
-            <div id="add-client" class="tab-content">
+            <div id="add-client" class="tab-content" style="display: none;">
                 <form id="add-client-form">
                     <div class="form-group">
                         <label for="client-name">Client Name *</label>
@@ -54,36 +234,14 @@
                         <label for="client-email">Email</label>
                         <input type="email" id="client-email" name="email">
                     </div>
-                    
-                    <h4>Social Media Tokens</h4>
-                    
-                    <div class="form-group">
-                        <label for="instagram-token">Instagram Token</label>
-                        <input type="text" id="instagram-token" name="instagram_token">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="facebook-token">Facebook Token</label>
-                        <input type="text" id="facebook-token" name="facebook_token">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="linkedin-token">LinkedIn Token</label>
-                        <input type="text" id="linkedin-token" name="linkedin_token">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="youtube-token">YouTube Token</label>
-                        <input type="text" id="youtube-token" name="youtube_token">
-                    </div>
-                    
+
                     <button type="submit" class="btn-primary">Add Client</button>
                 </form>
             </div>
         </section>
 
         <!-- Post Creation Section -->
-        <section class="card" id="post-creation-section" style="display: none;">
+        <section class="card" id="post-creation-section">
             <h2>Create Social Media Post</h2>
             
             <!-- Platform Selection -->
@@ -124,12 +282,33 @@
         </section>
 
         <!-- Results Section -->
-        <section class="card" id="results-section" style="display: none;">
+        <section class="card" id="results-section">
             <h2>Posting Results</h2>
             <div id="posting-results"></div>
         </section>
     </main>
 
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Tab Switching Logic
+        const tabButtons = document.querySelectorAll(".tab-btn");
+        const tabContents = document.querySelectorAll(".tab-content");
+        const postSection = document.getElementById("post-creation-section");
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                tabButtons.forEach(b => b.classList.remove("active"));
+                tabContents.forEach(c => c.style.display = "none");
+                btn.classList.add("active");
+                document.getElementById(btn.dataset.tab).style.display = "block";
+
+                // Hide or show post creation section
+                if (btn.dataset.tab === "add-client") {
+                    postSection.style.display = "none";
+                } else {
+                    postSection.style.display = "block";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
